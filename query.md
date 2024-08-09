@@ -41,6 +41,7 @@ w[population>800]                 // ways where population is greater than 800
 n[population>=800]                // nodes where population is greater than or equal to 800
 nw[name=~Starbucks]               // nodes and ways with names that contain Starbucks
 nw[name!~Starbucks]               // nodes and ways with names that do not contain Starbucks
+n[name="Starbucks","Coffee"]      // nodes with names that exactly match Starbucks or Coffee
 ```
 
 This language provides a flexible and powerful way to query Open Street Map

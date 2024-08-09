@@ -14,158 +14,21 @@ native API endpoint.
 
 ## Functions
 
-### `query.execute(query)`
+This is the [list of functions](examples/global.d.ts) that are available to use in the javascript runtime.
 
-Performs a geographical query.
-
-**Parameters:**
-
-- `query`: A string representing the query.
-
-**Returns:**
-
-- An array of results matching the query.
-
-**Example:**
-
-```javascript
-const results = query.execute("nwr[name=~Costco](prefix=colorado)");
-```
-
-### `query.prefixes()`
-
-Retrieves available geographical prefixes.
-
-**Returns:**
-
-- An array of prefix objects.
-
-**Example:**
-
-```javascript
-const prefixes = query.prefixes();
-```
-
-### `geo.asResults(...queries)`
-
-Combines multiple queries into a single result set.
-
-**Parameters:**
-
-- `queries`: Multiple query results.
-
-**Returns:**
-
-- A combined result set.
-
-**Example:**
-
-```javascript
-const allUnis = geo.asResults(
-  ...prefixes.flatMap((prefix) => {
-    return query.execute(`wr[amenity=university][name](prefix=${prefix.name})`);
-  }),
-);
-```
-
-### `colors.pick(index)`
-
-Generates a color based on an index. This returns color-blind friendly colors.
-
-**Parameters:**
-
-- `index`: A numerical index.
-
-**Returns:**
-
-- A color in hexadecimal format.
-
-**Example:**
-
-```javascript
-const color = colors.pick(1);
-```
-
-### `geo.asBounds(...entries)`
-
-Creates a bounding box from multiple entries.
-
-**Parameters:**
-
-- `entries`: Multiple entries to be included in the bounding box.
-
-**Returns:**
-
-- A bounding box object.
-
-**Example:**
-
-```javascript
-const bounds = geo.asBounds(entry1, entry2, entry3);
-```
-
-### `assert.eq(value1, value2, message)`
-
-Asserts that two values are equal.
-
-**Parameters:**
-
-- `value1`: The first value.
-- `value2`: The second value.
-- `message`: A string message indicating the assertion.
-
-**Example:**
-
-```javascript
-assert.eq(5, 5, "expected 5 to equal 5");
-```
-
-### `assert.geoJSON(payload)`
-
-Asserts that a payload is valid GeoJSON.
-
-**Parameters:**
-
-- `payload`: The GeoJSON payload.
-
-**Example:**
-
-```javascript
-const payload = {
-  type: "FeatureCollection",
-  features: [],
-};
-
-assert.geoJSON(payload); // Asserts the payload is valid GeoJSON
+```typescript
+--8<-- "docs/examples/global.d.ts"
 ```
 
 ## Examples
 
-### List of counties
+### List of counties (via `curl`)
 
 The following script will return all the counties, their state, and center point
 of a the bounding box.
 
 ```javascript
-const prefixes = geo.prefixes();
-
-const counties = prefixes.flatMap((prefix) => {
-  const results = geo.query(
-    `nwr[admin_level=6][boundary=administrative][name](prefix=${prefix.name})`,
-  );
-  return results.map((county) => {
-    const center = county.bbox().center();
-
-    return {
-      name: county.name,
-      lat: center.lat(),
-      lon: center.lon(),
-      state: prefix.name,
-    };
-  });
-});
-
-return counties;
+--8<-- "docs/examples/countries.ts"
 ```
 
 This script can be applied via two methods a `source` parameter in the query
@@ -194,3 +57,20 @@ This will return a JSON payload in the format of:
 
 This entire payload could be used for an auto complete client side. Rather that
 off loading all auto complete filtering to server side.
+
+### Find universities nearby each other
+
+Let's find unique university campuses near each other.
+
+```javascript
+--8<-- "docs/examples/universities.ts"
+```
+
+### Find neighborhood areas near areas
+
+This finds neighborhoods within Colorado that are within driving distance of
+Costco and walking distance from a highschool and coffee shop.
+
+```javascript
+--8<-- "docs/examples/neighborhoods.ts"
+```
