@@ -14,11 +14,14 @@ native API endpoint.
 
 ## Functions
 
-This is the [list of functions](examples/global.d.ts) that are available to use in the javascript runtime.
+This is the [list of functions](examples/global.d.ts) that are available to use
+in the javascript runtime.
 
+<!-- deno-fmt-ignore-start -->
 ```typescript
 --8<-- "docs/examples/global.d.ts"
 ```
+<!-- deno-fmt-ignore-end -->
 
 ## Examples
 
@@ -27,9 +30,11 @@ This is the [list of functions](examples/global.d.ts) that are available to use 
 The following script will return all the counties, their state, and center point
 of a the bounding box.
 
+<!-- deno-fmt-ignore-start -->
 ```javascript
 --8<-- "docs/examples/countries.ts"
 ```
+<!-- deno-fmt-ignore-end -->
 
 This script can be applied via two methods a `source` parameter in the query
 string or the request body. If using the query string, Cloudflare will cache it
@@ -62,15 +67,19 @@ off loading all auto complete filtering to server side.
 
 Let's find unique university campuses near each other.
 
+<!-- deno-fmt-ignore-start -->
 ```javascript
 --8<-- "docs/examples/universities.ts"
 ```
+<!-- deno-fmt-ignore-end -->
 
 ### Find neighborhood areas near areas
 
 This finds neighborhoods within Colorado that are within driving distance of
 Costco and walking distance from a highschool and coffee shop.
 
+<!-- deno-fmt-ignore-start -->
 ```javascript
 --8<-- "docs/examples/neighborhoods.ts"
 ```
+<!-- deno-fmt-ignore-end -->

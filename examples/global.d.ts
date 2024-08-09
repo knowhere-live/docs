@@ -24,7 +24,7 @@ interface Colors {
 }
 
 interface Bound {
-  extend(number);
+  extend(number): Bound;
   center(): Point;
 }
 
