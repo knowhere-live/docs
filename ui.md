@@ -1,5 +1,10 @@
 # Manifest driven UI
 
+!!! warning
+
+Right now, manifests is not a feature available to users. We are working on
+providing a mechanism to make it easily accessible.
+
 ## Introduction
 
 Our application features a dynamic map interface and an interactive form, both
@@ -29,7 +34,7 @@ Here's the structure of a manifest:
 ```typescript
 interface Manifest {
   source: string;
-  form: FormSchema;
+  form: { [key: string]: string };
   about: string;
 }
 ```
@@ -113,6 +118,3 @@ When this manifest is used:
 This example demonstrates how the manifest system allows for creating complex,
 interactive geographical data visualizations with minimal code duplication and
 maximum flexibility.
-
-Right now, manifests is not a feature available to users. We are working on
-providing a mechanism to make it easily accessible.
