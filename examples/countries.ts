@@ -8,7 +8,7 @@ const counties = prefixes.flatMap((prefix) => {
     const center = county.bound().center();
 
     return {
-      name: county.name,
+      name: county.tags.name,
       lat: center.lat(),
       lon: center.lon(),
       state: prefix.name,
@@ -16,4 +16,4 @@ const counties = prefixes.flatMap((prefix) => {
   });
 });
 
-export { payload };
+export { counties as payload };

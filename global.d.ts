@@ -11,11 +11,11 @@ interface Properties {
 interface Feature {
   type: string;
   properties: Properties;
-  geometry: any;
+  geometry: unknown;
 }
 
 interface Assert {
-  geoJSON(payload: any): void;
+  geoJSON(payload: unknown): void;
   eq(value: boolean, message: string): void;
 }
 

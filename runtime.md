@@ -14,12 +14,12 @@ native API endpoint.
 
 ## Functions
 
-This is the [list of functions](examples/global.d.ts) that are available to use
-in the javascript runtime.
+This is the [list of functions](global.d.ts) that are available to use in the
+javascript runtime.
 
 <!-- deno-fmt-ignore-start -->
 ```typescript
---8<-- "docs/examples/global.d.ts"
+--8<-- "docs/global.d.ts"
 ```
 <!-- deno-fmt-ignore-end -->
 
