@@ -1,16 +1,25 @@
----
-outline: deep
----
-
 # Runtime API
 
 The API endpoint is `/proxy/api/runtime`. This endpoint allows arbitrary
-Javascript scripts to run within the runtime of the Go code that queries the OSM
-data I've processed.
+Javascript scripts to run within the runtime of the Go code that queries the
+Open Street Map data.
 
-NOTE: The API endpoint goes through Cloudflare Proxy at the moment. This was
-designed to have some load balancing and security protection in front of my
-native API endpoint.
+The runtime is a sandboxed custom environment, with the following restrictions:
+
+- No network access
+- No file access
+- No npm packages -- no `import` or `require`
+- Timeout 10 seconds
+
+It supports the following:
+
+- Typescript, but no type verification is done.
+- Standard [ECMAScript 5.1 features](https://262.ecma-international.org/5.1/) --
+  i.e.
+  [Regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions),
+  [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
+  [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON),
+  etc.
 
 ## Functions
 
