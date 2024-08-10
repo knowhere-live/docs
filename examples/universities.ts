@@ -49,4 +49,4 @@ const payload = {
   }),
 };
 
-return payload;
+export { payload };

@@ -16,4 +16,4 @@ const counties = prefixes.flatMap((prefix) => {
   });
 });
 
-return counties;
+export { payload };

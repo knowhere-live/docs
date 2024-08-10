@@ -16,7 +16,7 @@ interface Feature {
 
 interface Assert {
   geoJSON(payload: any): void;
-  eq(value1: any, value2: any, message: string): void;
+  eq(value: boolean, message: string): void;
 }
 
 interface Colors {
@@ -26,14 +26,16 @@ interface Colors {
 interface Bound {
   extend(number): Bound;
   center(): Point;
+  intersects(bound: Bound): boolean;
 }
 
 interface BoundArray extends Array<Bound> {
-  asFeature(properties: Properties): Feature;
+  asFeature(properties?: Properties): Feature;
+  asBound(): Bound;
 }
 
 interface Point {
-  asFeature(properties: Properties): Feature;
+  asFeature(properties?: Properties): Feature;
   asBound(): Bound;
   lat(): number;
   lon(): number;
@@ -52,18 +54,25 @@ interface Geo {
   asPoint(lat: number, lon: number): Point;
   asResults(...results: Result[]): ResultArray;
   asBounds(...bounds: Bound[]): BoundArray;
+  rtree(): Tree;
 }
 
 interface Result {
-  asFeature(hash): Feature;
+  asFeature(properties?: Properties): Feature;
   name: string;
   id: number;
+  minLat: number;
+  minLon: number;
+  maxLat: number;
+  maxLon: number;
+  tags: { [key: string]: string };
   bound(): Bound;
 }
 
 interface Tree {
   nearby(Bound, number): ResultArray;
   within(Bound): ResultArray;
+  insert(Result): void;
 }
 
 interface ResultArray extends Array<Result> {
@@ -81,6 +90,7 @@ interface Query {
   union(...string): ResultArray;
   execute(string): ResultArray;
   prefixes(): Prefix[];
+  fromAddress(address: string): ResultArray;
 }
 
 interface Params {

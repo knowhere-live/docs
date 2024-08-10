@@ -78,4 +78,4 @@ const payload = {
 
 assert.geoJSON(payload);
 
-return payload;
+export { payload };
