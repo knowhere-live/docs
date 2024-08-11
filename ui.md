@@ -2,8 +2,8 @@
 
 !!! warning
 
-Right now, manifests is not a feature available to users. We are working on
-providing a mechanism to make it easily accessible.
+    Right now, manifests is not a feature available to users. We are working on
+    providing a mechanism to make it easily accessible.
 
 ## Introduction
 
