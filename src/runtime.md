@@ -28,7 +28,7 @@ javascript runtime.
 
 <!-- deno-fmt-ignore-start -->
 ```typescript
---8<-- "docs/global.d.ts"
+--8<-- "src/global.d.ts"
 ```
 <!-- deno-fmt-ignore-end -->
 
@@ -41,7 +41,7 @@ of a the bounding box.
 
 <!-- deno-fmt-ignore-start -->
 ```javascript
---8<-- "docs/examples/countries.ts"
+--8<-- "src/examples/countries.ts"
 ```
 <!-- deno-fmt-ignore-end -->
 
@@ -78,7 +78,7 @@ Let's find unique university campuses near each other.
 
 <!-- deno-fmt-ignore-start -->
 ```javascript
---8<-- "docs/examples/universities.ts"
+--8<-- "src/examples/universities.ts"
 ```
 <!-- deno-fmt-ignore-end -->
 
@@ -89,6 +89,6 @@ Costco and walking distance from a highschool and coffee shop.
 
 <!-- deno-fmt-ignore-start -->
 ```javascript
---8<-- "docs/examples/neighborhoods.ts"
+--8<-- "src/examples/neighborhoods.ts"
 ```
 <!-- deno-fmt-ignore-end -->
