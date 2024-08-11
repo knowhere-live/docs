@@ -1,7 +1,28 @@
 site_name: Knowhere Documentation
 site_url: https://knowhere.live/docs
+repo_url: https://github.com/knowhere-live/docs/
+repo_name: knowhere/docs
+edit_uri: blob/main/src/
 theme:
   name: material
+  features:
+    - content.action.edit
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
