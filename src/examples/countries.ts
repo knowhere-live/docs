@@ -1,8 +1,10 @@
-const prefixes = query.prefixes();
+/// <reference path="../global.d.ts" />
 
-const counties = prefixes.flatMap((prefix) => {
+const areas = query.areas();
+
+const counties = areas.flatMap((area) => {
   const results = query.execute(
-    `nwr[admin_level=6][boundary=administrative][name](prefix=${prefix.name})`,
+    `nwr[admin_level=6][boundary=administrative][name](area=${area.name})`,
   );
   return results.map((county) => {
     const center = county.bound().center();
@@ -11,7 +13,7 @@ const counties = prefixes.flatMap((prefix) => {
       name: county.tags.name,
       lat: center.lat(),
       lon: center.lon(),
-      state: prefix.name,
+      state: area.name,
     };
   });
 });

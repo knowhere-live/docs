@@ -41,7 +41,7 @@ interface Manifest {
 
 The `FormSchema` is an array of field definitions, each with properties like
 `type`, `label`, `name`, and `defaultValue`. The available field types include
-`string`, `text`, `checkbox`, `prefix`, `address`, and `range`.
+`string`, `text`, `checkbox`, `area`, `address`, and `range`.
 
 ## Example Manifest
 
@@ -51,11 +51,11 @@ will allow users to explore counties within different states.
 ```typescript
 const manifest: Manifest = {
   source: `
-    const prefixes = query.prefixes();
+    const areas = query.areas();
 
-    const counties = prefixes.flatMap((prefix) => {
+    const counties = areas.flatMap((area) => {
       const results = query.execute(
-        \`nwr[admin_level=6][boundary=administrative][name](prefix=\${prefix.name})\`
+        \`nwr[admin_level=6][boundary=administrative][name](area=\${area.name})\`
       );
       return results.map((county) => {
         const center = county.bound().center();
@@ -63,7 +63,7 @@ const manifest: Manifest = {
           name: county.tags.name,
           lat: center.lat(),
           lon: center.lon(),
-          state: prefix.name,
+          state: area.name,
         };
       });
     });
@@ -88,7 +88,7 @@ const manifest: Manifest = {
   `,
   form: [
     {
-      type: "prefix",
+      type: "area",
       label: "State",
       name: "state",
       defaultValue: "colorado",
@@ -102,9 +102,9 @@ const manifest: Manifest = {
 
 In this example:
 
-1. The `source` code fetches all prefixes (states) and their counties, creating
-   a GeoJSON FeatureCollection.
-2. The `form` includes a single "prefix" input that allows users to select a
+1. The `source` code fetches all areas (states) and their counties, creating a
+   GeoJSON FeatureCollection.
+2. The `form` includes a single "area" input that allows users to select a
    state.
 
 When this manifest is used:

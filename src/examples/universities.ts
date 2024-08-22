@@ -1,10 +1,12 @@
-const prefixes = query.prefixes();
+/// <reference path="../global.d.ts" />
+
+const areas = query.areas();
 
 // find all the universities country wide
 const allUnis = geo.asResults(
-  ...prefixes.flatMap((prefix) => {
+  ...areas.flatMap((area) => {
     return query.execute(
-      `wr[amenity=university][name](prefix=${prefix.name})`,
+      `wr[amenity=university][name](area=${area.name})`,
     );
   }),
 );

@@ -89,7 +89,7 @@ interface ResultArray extends Array<Result> {
 interface Query {
   union(...string): ResultArray;
   execute(string): ResultArray;
-  prefixes(): Prefix[];
+  areas(): Prefix[];
   fromAddress(address: string): ResultArray;
 }
 
