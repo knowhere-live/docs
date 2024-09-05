@@ -54,6 +54,7 @@ interface Geo {
   asPoint(lat: number, lon: number): Point;
   asResults(...results: Result[]): ResultArray;
   asBounds(...bounds: Bound[]): BoundArray;
+  distance(p1: Bound, p2: Bound): Number
   rtree(): Tree;
 }
 
