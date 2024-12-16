@@ -27,6 +27,9 @@ interface Bound {
   extend(number): Bound;
   center(): Point;
   intersects(bound: Bound): boolean;
+  min(): [number, number];
+  max(): [number, number];
+  asFeature(properties?: Properties): Feature;
 }
 
 interface BoundArray extends Array<Bound> {
