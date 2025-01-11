@@ -17,6 +17,7 @@ interface Feature {
 interface Assert {
   geoJSON(payload: unknown): void;
   eq(value: boolean, message: string): void;
+  stab(msg: string): void;
 }
 
 interface Colors {
@@ -30,6 +31,7 @@ interface Bound {
   min(): [number, number];
   max(): [number, number];
   asFeature(properties?: Properties): Feature;
+  asBB(): string;
 }
 
 interface BoundArray extends Array<Bound> {
@@ -88,6 +90,7 @@ interface ResultArray extends Array<Result> {
     neighborRadius: number,
     count: number,
   ): ResultArray[];
+  tagCount(): { [key: string]: number };
 }
 
 interface Query {
