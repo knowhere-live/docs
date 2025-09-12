@@ -46,13 +46,14 @@ interface Point {
   lon(): number;
 }
 
-interface Prefix {
+interface Area {
   name: string;
   fullName: string;
   minLat: number;
   minLon: number;
   maxLat: number;
   maxLon: number;
+  asBound(): Bound;
 }
 
 interface Geo {
@@ -72,7 +73,7 @@ interface Result {
   maxLat: number;
   maxLon: number;
   tags: { [key: string]: string };
-  bound(): Bound;
+  asBound(): Bound;
 }
 
 interface Tree {
