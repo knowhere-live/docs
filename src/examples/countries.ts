@@ -7,7 +7,7 @@ const counties = areas.flatMap((area) => {
     `nwr[admin_level=6][boundary=administrative][name](area=${area.name})`,
   );
   return results.map((county) => {
-    const center = county.bound().center();
+    const center = county.asBound().center();
 
     return {
       name: county.tags.name,
