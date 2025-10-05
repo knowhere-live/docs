@@ -21,11 +21,11 @@ interface Assert {
 }
 
 interface Colors {
-  pick(number): string;
+  pick(index: number): string;
 }
 
 interface Bound {
-  extend(number): Bound;
+  extend(distance: number): Bound;
   center(): Point;
   intersects(bound: Bound): boolean;
   min(): [number, number];
@@ -46,6 +46,11 @@ interface Point {
   lon(): number;
 }
 
+interface Prefix {
+  name: string;
+  fullName: string;
+}
+
 interface Area {
   name: string;
   fullName: string;
@@ -60,7 +65,7 @@ interface Geo {
   asPoint(lat: number, lon: number): Point;
   asResults(...results: Result[]): ResultArray;
   asBounds(...bounds: Bound[]): BoundArray;
-  distance(p1: Bound, p2: Bound): Number
+  distance(p1: Bound, p2: Bound): number;
   rtree(): Tree;
 }
 
@@ -77,14 +82,14 @@ interface Result {
 }
 
 interface Tree {
-  nearby(Bound, number): ResultArray;
-  within(Bound): ResultArray;
-  insert(Result): void;
+  nearby(bound: Bound, distance: number): ResultArray;
+  within(bound: Bound): ResultArray;
+  insert(result: Result): void;
 }
 
 interface ResultArray extends Array<Result> {
   asTree(depth: number): Tree;
-  cluster(number): ResultArray;
+  cluster(distance: number): ResultArray;
   overlap(
     results: ResultArray,
     originRadius: number,
@@ -95,12 +100,14 @@ interface ResultArray extends Array<Result> {
 }
 
 interface Query {
-  union(...string): ResultArray;
-  execute(string): ResultArray;
+  union(...queries: string[]): ResultArray;
+  execute(queryString: string): ResultArray;
   areas(): Prefix[];
   fromAddress(address: string): ResultArray;
 }
 
+// Params is intentionally loosely typed to allow flexible access patterns in scripts
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 interface Params {
-  [key: string]: string;
+  [key: string]: any;
 }
