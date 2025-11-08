@@ -30,17 +30,17 @@ interface Bound {
   intersects(bound: Bound): boolean;
   min(): [number, number];
   max(): [number, number];
-  asFeature(properties?: Properties): Feature;
+  asFeature(properties?: Properties, appendTags?: boolean): Feature;
   asBB(): string;
 }
 
 interface BoundArray extends Array<Bound> {
-  asFeature(properties?: Properties): Feature;
+  asFeature(properties?: Properties, appendTags?: boolean): Feature;
   asBound(): Bound;
 }
 
 interface Point {
-  asFeature(properties?: Properties): Feature;
+  asFeature(properties?: Properties, appendTags?: boolean): Feature;
   asBound(): Bound;
   lat(): number;
   lon(): number;
@@ -70,7 +70,7 @@ interface Geo {
 }
 
 interface Result {
-  asFeature(properties?: Properties): Feature;
+  asFeature(properties?: Properties, appendTags?: boolean): Feature;
   name: string;
   id: number;
   minLat: number;
