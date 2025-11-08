@@ -79,6 +79,7 @@ interface Result {
   maxLon: number;
   tags: { [key: string]: string };
   asBound(): Bound;
+  asPoint(): Point;
 }
 
 interface Tree {
