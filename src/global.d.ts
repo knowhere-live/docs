@@ -4,8 +4,16 @@ declare const geo: Geo;
 declare const params: Params;
 declare const query: Query;
 
+interface IsochroneConfig {
+  profile?: string;
+  contours_minutes?: number[];
+  contours_meters?: number[];
+  denoise?: number;
+  generalize?: number;
+}
+
 interface Properties {
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | IsochroneConfig;
 }
 
 interface Feature {
