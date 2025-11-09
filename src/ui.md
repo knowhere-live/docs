@@ -118,3 +118,118 @@ When this manifest is used:
 This example demonstrates how the manifest system allows for creating complex,
 interactive geographical data visualizations with minimal code duplication and
 maximum flexibility.
+
+## Feature Properties
+
+### Isochrone Visualization
+
+Features can include special properties that enhance map visualization. One
+powerful feature is the `isochrone` property, which integrates with the
+[Mapbox Isochrone API](https://docs.mapbox.com/api/navigation/isochrone/) to
+display reachable areas from a point location.
+
+#### Basic Usage
+
+To enable isochrone visualization for a Point feature, add the `isochrone`
+property:
+
+```javascript
+const feature = center.asFeature({
+  "marker-color": "#ff0000",
+  legend: "Home Location",
+  name: "My Home",
+  isochrone: true, // Uses default settings
+});
+```
+
+This will display drive-time polygons showing areas reachable in 15, 30, 45, and
+60 minutes using the `driving-traffic` profile.
+
+#### Advanced Configuration
+
+For more control, pass an object with specific configuration options:
+
+```javascript
+const feature = center.asFeature({
+  "marker-color": "#ff0000",
+  legend: "Home Location",
+  name: "My Home",
+  isochrone: {
+    profile: "walking", // Options: driving, driving-traffic, walking, cycling
+    contours_minutes: [5, 10, 15], // Time-based contours (1-60 minutes)
+    denoise: 1, // Remove smaller contours (0.0-1.0)
+    generalize: 50, // Simplification tolerance in meters
+  },
+});
+```
+
+#### Distance-Based Isochrones
+
+Instead of time-based contours, you can use distance-based contours in meters:
+
+```javascript
+// Calculate isochrone contours based on search radius
+const radiusMeters = params.radius * 1609.34; // miles to meters
+const isochroneContours = [
+  Math.round(radiusMeters * 0.25),
+  Math.round(radiusMeters * 0.5),
+  Math.round(radiusMeters * 0.75),
+  Math.round(radiusMeters),
+].filter((m) => m <= 100000); // API limit is 100km
+
+const feature = center.asFeature({
+  "marker-color": "#ff0000",
+  legend: "Home Location",
+  name: "My Home",
+  isochrone: {
+    profile: "driving",
+    contours_meters: isochroneContours, // Distance-based contours (1-100000 meters)
+    denoise: 1,
+  },
+});
+```
+
+#### Configuration Options
+
+| Property           | Type     | Description                                                         | Default            |
+| ------------------ | -------- | ------------------------------------------------------------------- | ------------------ |
+| `profile`          | string   | Routing profile: `driving`, `driving-traffic`, `walking`, `cycling` | `driving-traffic`  |
+| `contours_minutes` | number[] | Time contours in minutes (1-60). Max 4 contours.                    | `[15, 30, 45, 60]` |
+| `contours_meters`  | number[] | Distance contours in meters (1-100000). Max 4 contours.             | -                  |
+| `denoise`          | number   | Remove smaller contours (0.0-1.0). 1.0 = only largest contour.      | `1`                |
+| `generalize`       | number   | Douglas-Peucker generalization tolerance in meters                  | -                  |
+
+**Note:** You must specify either `contours_minutes` or `contours_meters`, not
+both.
+
+#### Example: Nearby Search with Matching Isochrones
+
+The nearby search manifest demonstrates distance-based isochrones that align
+with the search radius:
+
+```javascript
+// In nearby.js
+const radiusMeters = params.radius * 1609.34; // Convert miles to meters
+const isochroneContours = [
+  Math.round(radiusMeters * 0.25),
+  Math.round(radiusMeters * 0.5),
+  Math.round(radiusMeters * 0.75),
+  Math.round(radiusMeters),
+].filter((m) => m <= 100000);
+
+features.push(
+  center.asFeature({
+    "marker-color": colors.pick(0),
+    legend: "Home Location",
+    name: full_address + "\n" + score,
+    isochrone: {
+      profile: "driving",
+      contours_meters: isochroneContours,
+      denoise: 1,
+    },
+  }),
+);
+```
+
+This creates isochrone polygons at 25%, 50%, 75%, and 100% of the search radius,
+showing drivable areas that match the amenity search distance.
