@@ -15,12 +15,14 @@ from location-based information.
 
 It is recommended starting with the following sections:
 
-1. [Runtime API](runtime.md): Understand the core functionality and available
+1. [MCP Server](mcp.md): Connect Knowhere to AI assistants like Claude Desktop
+   for natural language queries.
+2. [Runtime API](runtime.md): Understand the core functionality and available
    methods.
-2. [Query Language](query.md): Learn how to construct powerful queries to filter
+3. [Query Language](query.md): Learn how to construct powerful queries to filter
    and retrieve data.
-3. [Examples](runtime.md#examples): See real-world applications and use cases.
-4. [Manifest UI](ui.md): Create landing pages for maps and filters without
+4. [Examples](runtime.md#examples): See real-world applications and use cases.
+5. [Manifest UI](ui.md): Create landing pages for maps and filters without
    deploying software.
 
 ## Stay Updated
